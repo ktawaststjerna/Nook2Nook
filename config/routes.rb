@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :queue_list_to_users
+  resources :queue_lists
   resources :items
   resources :listings
   resources :users

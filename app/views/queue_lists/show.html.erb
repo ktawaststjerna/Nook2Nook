@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Max users:</strong>
+  <%= @queue_list.max_users %>
+</p>
+
+<p>
+  <strong>Allowed users:</strong>
+  <%= @queue_list.allowed_users %>
+</p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @queue_list.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @queue_list.end_time %>
+</p>
+
+<%= link_to 'Edit', edit_queue_list_path(@queue_list) %> |
+<%= link_to 'Back', queue_lists_path %>
