@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  self.implicit_order_column = 'created_at'
-
   has_many :listings
+  has_many :queue_list_to_users
+  has_many :queue_lists, through: :queue_list_to_users
 end

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Queue:</strong>
+  <%= @queue_list_to_user.queue_id %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @queue_list_to_user.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_queue_list_to_user_path(@queue_list_to_user) %> |
+<%= link_to 'Back', queue_list_to_users_path %>
