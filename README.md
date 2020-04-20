@@ -1,24 +1,13 @@
-# README
+1) I want to BUY from Daisy on someone elses island
+2) I want to SELL to Tom Nook on someone elses island
+3) I want PEOPLE to BUY from Daisy
+4) I want PEOPLE to SELL to Tom Nook
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+In table type of listing the booleans are as follows for the previous sentences
 
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+| Question | Hosting | Selling |
+|----------|---------|---------|
+| 1        | false   | false   |
+| 2        | false   | true    |
+| 3        | true    | false   |
+| 4        | true    | true    |
