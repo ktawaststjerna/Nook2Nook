@@ -1,5 +1,7 @@
 class Listing < ApplicationRecord
   belongs_to :user
+  belongs_to :item
+
   has_one :queue_list
 
   scope :not_hosting_not_selling, -> { where(hosting: false, selling: false) }
@@ -7,25 +9,44 @@ class Listing < ApplicationRecord
   scope :hosting_not_selling, -> { where(hosting: true, selling: false) }
   scope :hosting_selling, -> { where(hosting: true, selling: true) }
 
-  def self.create_not_hosting_not_selling!(user_id, item_id, amount_minimum, amount_maximum)
+  def max_users
+    queue_list&.max_users
+  end
+
+  def allowed_users
+    queue_list&.allowed_users
+  end
+
+  def self.create_listing(params)
+    create_not_hosting_not_selling!(params[:user_id], params[:item_id], params[:amount_minimum], params[:amount_maximum], params[:start_time], params[:end_time]) if !params[:hosting] && !params[:selling]
+    create_not_hosting_selling!(params[:user_id], params[:item_id], params[:amount_minimum], params[:amount_maximum], params[:start_time], params[:end_time]) if !params[:hosting] && params[:selling]
+    create_hosting_not_selling!(params[:user_id], params[:item_id], params[:max_users], params[:allowed_users], params[:start_time], params[:end_time]) if params[:hosting] && !params[:selling]
+    create_hosting_selling!(params[:user_id], params[:item_id], params[:max_users], params[:allowed_users], params[:start_time], params[:end_time]) if params[:hosting] && params[:selling]
+  end
+
+  def self.create_not_hosting_not_selling!(user_id, item_id, amount_minimum, amount_maximum, start_time, end_time)
     Listing.create!(
       user_id: user_id,
       hosting: false,
       selling: false,
       item_id: item_id,
       amount_minimum: amount_minimum,
-      amount_maximum: amount_maximum
+      amount_maximum: amount_maximum,
+      start_time: start_time,
+      end_time: end_time,
     )
   end
 
-  def self.create_not_hosting_selling!(user_id, item_id, amount_minimum, amount_maximum)
+  def self.create_not_hosting_selling!(user_id, item_id, amount_minimum, amount_maximum, start_time, end_time)
     Listing.create!(
       user_id: user_id,
       hosting: false,
       selling: true,
       item_id: item_id,
       amount_minimum: amount_minimum,
-      amount_maximum: amount_maximum
+      amount_maximum: amount_maximum,
+      start_time: start_time,
+      end_time: end_time,
     )
   end
 
@@ -35,14 +56,14 @@ class Listing < ApplicationRecord
       hosting: true,
       selling: false,
       item_id: item_id,
-      amount: amount
+      amount: amount,
+      start_time: start_time,
+      end_time: end_time,
     )
 
     queue_list = QueueList.new(
       max_users: max_users,
       allowed_users: allowed_users,
-      start_time: start_time,
-      end_time: end_time
     )
 
     queue_list.listing = listing
@@ -65,14 +86,14 @@ class Listing < ApplicationRecord
       hosting: true,
       selling: true,
       item_id: item_id,
-      amount: amount
+      amount: amount,
+      start_time: start_time,
+      end_time: end_time,
     )
 
     queue_list = QueueList.new(
       max_users: max_users,
       allowed_users: allowed_users,
-      start_time: start_time,
-      end_time: end_time
     )
 
     queue_list.listing = listing

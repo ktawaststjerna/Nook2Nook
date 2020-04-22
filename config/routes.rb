@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'listings#index'
+
   resources :queue_list_to_users
   resources :queue_lists
   resources :items
