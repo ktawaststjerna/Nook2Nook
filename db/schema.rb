@@ -30,6 +30,8 @@ ActiveRecord::Schema.define(version: 2020_04_20_232010) do
     t.integer "amount"
     t.integer "amount_minimum"
     t.integer "amount_maximum"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["item_id"], name: "index_listings_on_item_id"
@@ -46,8 +48,6 @@ ActiveRecord::Schema.define(version: 2020_04_20_232010) do
   create_table "queue_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.integer "max_users"
     t.integer "allowed_users"
-    t.datetime "start_time"
-    t.datetime "end_time"
     t.uuid "listing_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

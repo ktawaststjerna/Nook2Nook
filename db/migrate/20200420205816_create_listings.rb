@@ -8,6 +8,8 @@ class CreateListings < ActiveRecord::Migration[6.0]
       t.integer :amount
       t.integer :amount_minimum
       t.integer :amount_maximum
+      t.datetime :start_time
+      t.datetime :end_time
 
       t.timestamps
     end
