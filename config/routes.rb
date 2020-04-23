@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   resources :join_listings
   resources :host_listings
   require 'sidekiq/web'
-  root 'listings#index'
+  root 'host_listings#index'
 
   mount Sidekiq::Web => '/sidekiq'
 
