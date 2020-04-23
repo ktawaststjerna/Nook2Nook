@@ -5,6 +5,7 @@ class EnqueueListingJob < ApplicationJob
     limit_of_listings = 10
     join_listing = args[0]
 
+    # TODO: Join Listings added more then 10
     return if join_listing.host_listings.count >= limit_of_listings
 
     # Only listings that are not hosting should get in

@@ -7,7 +7,11 @@ class HostListing < ApplicationRecord
   scope :selling, -> { where(selling: true) }
   scope :buying, -> { where(selling: false) }
   scope :active, -> { where('start_date <= ? AND end_date >= ?', DateTime.now, DateTime.now) }
-  scope :allowed_join_listings, -> { host_listing_to_join_listings.limit(4) }
+
+  def allowed_join_listings
+    # TODO: Create scheduled job to remove listings might need a archived boolean
+    host_listing_to_join_listings.limit(4)
+  end
 
   def enqueue(join_listing)
     return if join_listing.user == user
