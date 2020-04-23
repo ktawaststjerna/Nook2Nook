@@ -8,6 +8,7 @@ class Listing < ApplicationRecord
   scope :not_hosting_selling, -> { where(hosting: false, selling: true) }
   scope :hosting_not_selling, -> { where(hosting: true, selling: false) }
   scope :hosting_selling, -> { where(hosting: true, selling: true) }
+  scope :active, -> { where('start_time <= ? AND end_time >= ?', DateTime.now, DateTime.now) }
 
   def max_users
     queue_list&.max_users
@@ -25,7 +26,7 @@ class Listing < ApplicationRecord
   end
 
   def self.create_not_hosting_not_selling!(user_id, item_id, amount_minimum, amount_maximum, start_time, end_time)
-    Listing.create!(
+    listing = Listing.create!(
       user_id: user_id,
       hosting: false,
       selling: false,
@@ -35,6 +36,8 @@ class Listing < ApplicationRecord
       start_time: start_time,
       end_time: end_time,
     )
+
+    # EnqueueListingJob.perform_later(listing)
   end
 
   def self.create_not_hosting_selling!(user_id, item_id, amount_minimum, amount_maximum, start_time, end_time)

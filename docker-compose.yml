@@ -12,7 +12,7 @@ services:
       - "3000:3000"
     depends_on:
       - db
-      # - redis
+      - redis
       # - minio
     env_file:
       - .env
@@ -20,3 +20,6 @@ services:
       sh -c "bundle install && bundle exec rails s"
   db:
     image: postgres:11.1-alpine
+
+  redis:
+    image: redis:5.0.9

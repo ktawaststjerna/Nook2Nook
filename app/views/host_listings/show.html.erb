@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @host_listing.user_id %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @host_listing.item_id %>
+</p>
+
+<p>
+  <strong>Selling:</strong>
+  <%= @host_listing.selling %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @host_listing.amount %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @host_listing.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @host_listing.end_date %>
+</p>
+
+<p>
+  <strong>Max users:</strong>
+  <%= @host_listing.max_users %>
+</p>
+
+<p>
+  <strong>Allowed users:</strong>
+  <%= @host_listing.allowed_users %>
+</p>
+
+<%= link_to 'Edit', edit_host_listing_path(@host_listing) %> |
+<%= link_to 'Back', host_listings_path %>
