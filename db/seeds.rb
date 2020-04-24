@@ -14,7 +14,7 @@ end
 pp 'Creating Join Listings'
 1000.times do |x|
   join_listing = JoinListing.create(user_id: User.all[rand(0..9)].id, item_id: Item.first.id, selling: [true, false].sample, amount_min: 0, amount_max: 1000, start_date: DateTime.now - 1.day, end_date: DateTime.now + 1.day)
-  join_listing.join_host_listings # Sidekiq needs to be turned on for this
+  # join_listing.join_host_listings # Sidekiq needs to be turned on for this
 end
 
 # Archived

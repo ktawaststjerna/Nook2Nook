@@ -23,6 +23,7 @@ gem 'redis', '~> 4.0'
 gem 'bcrypt', '~> 3.1.7'
 # Use Sidekiq for jobs
 gem 'sidekiq', '~> 6.0.2'
+gem 'sidekiq-cron', '~> 1.2.0'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

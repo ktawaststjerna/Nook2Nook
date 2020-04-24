@@ -8,12 +8,17 @@ class HostListing < ApplicationRecord
   scope :buying, -> { where(selling: false) }
   scope :active, -> { where('start_date <= ? AND end_date >= ?', DateTime.now, DateTime.now) }
 
+  def full?
+    join_listings.count >= max_users
+  end
+
   def allowed_join_listings
     # TODO: Create scheduled job to remove listings might need a archived boolean
     host_listing_to_join_listings.limit(4)
   end
 
   def enqueue(join_listing)
+    return if join_listings.include?(join_listing)
     return if join_listing.user == user
     return if join_listings.size >= max_users
     return if DateTime.now < start_date || DateTime.now > end_date

@@ -1,0 +1,4 @@
+enqueue_active_listings_job:
+  cron: "* * * * *"
+  class: "EnqueueActiveListingsJob"
+  queue: default
