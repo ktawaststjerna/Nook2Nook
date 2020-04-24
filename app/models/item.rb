@@ -1,3 +1,4 @@
 class Item < ApplicationRecord
-  has_one :listing
+  has_many :join_listings
+  has_many :host_listings
 end

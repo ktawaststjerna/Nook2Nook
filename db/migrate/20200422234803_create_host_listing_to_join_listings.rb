@@ -3,6 +3,8 @@ class CreateHostListingToJoinListings < ActiveRecord::Migration[6.0]
     create_table :host_listing_to_join_listings, id: :uuid do |t|
       t.uuid :host_listing_id
       t.uuid :join_listing_id
+      t.boolean :completed
+      t.datetime :invitation_sent_time
 
       t.timestamps
     end
