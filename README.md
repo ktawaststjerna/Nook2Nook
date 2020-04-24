@@ -22,4 +22,4 @@ and to reset failed jobs:
 Sidekiq.redis {|c| c.del('stat:failed') }
 
 Clear queue
-`Sidekiq::Queue.all.each(&:clear)`
+Sidekiq::Queue.all.each(&:clear)

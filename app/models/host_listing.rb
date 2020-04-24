@@ -25,8 +25,7 @@ class HostListing < ApplicationRecord
   end
 
   def allowed_join_listings
-    # TODO: Create scheduled job to remove listings might need a archived boolean
-    host_listing_to_join_listings.not_completed.limit(allowed_users)
+    join_listings.where(id: host_listing_to_join_listings.not_completed.limit(allowed_users).pluck(:join_listing_id))
   end
 
   def enqueue(join_listing)
@@ -37,7 +36,13 @@ class HostListing < ApplicationRecord
     return if DateTime.now < start_date || DateTime.now > end_date
 
     host_listing_to_join_listing = HostListingToJoinListing.create!(host_listing_id: id, join_listing_id: join_listing.id)
-    allow_onto_island(join_listing.id) if allowed_join_listings < allowed_users
+    allow_onto_island(join_listing.id) if allowed_join_listings.include?(join_listing)
+  end
+
+  def mass_allow_onto_island
+    allowed_join_listings.each do |jl|
+      allow_onto_island(jl.id) if HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: jl.id).invitation_sent_time.nil?
+    end
   end
 
   def allow_onto_island(join_listing_id)
