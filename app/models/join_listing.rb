@@ -7,10 +7,16 @@ class JoinListing < ApplicationRecord
   # TODO: 12 hour maximum
 
   before_save :duplicate_listings?
+  before_save :time_limit_check
 
   scope :selling, -> { where(selling: true) }
   scope :buying, -> { where(selling: false) }
   scope :active, -> { where('start_date <= ? AND end_date >= ?', DateTime.now, DateTime.now) }
+
+  def time_limit_check
+    twelve_hours_in_seconds = 43210 # Slight padding on seconds just incase there's a delay inbetween start and end date on creating...
+    raise 'Join Listing cannot be longer then 12 hours' if end_date.ago(twelve_hours_in_seconds) > start_date
+  end
 
   def completed?(host_listing_id)
     host_listing_to_join_listings.find_by(host_listing_id: host_listing_id).completed?

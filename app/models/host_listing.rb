@@ -7,10 +7,16 @@ class HostListing < ApplicationRecord
   # TODO: 12 hour maximum
 
   before_save :duplicate_listings?
+  before_save :time_limit_check
 
   scope :selling, -> { where(selling: true) }
   scope :buying, -> { where(selling: false) }
   scope :active, -> { where('start_date <= ? AND end_date >= ?', DateTime.now, DateTime.now) }
+
+  def time_limit_check
+    twelve_hours_in_seconds = 43210 # Slight padding on seconds just incase there's a delay inbetween start and end date on creating...
+    raise 'Host Listing cannot be longer then 12 hours' if end_date.ago(twelve_hours_in_seconds) > start_date
+  end
 
   def duplicate_listings?
     raise "User already has Join Listing with Item #{item.name}" if user.join_listings.pluck(:item_id).include?(item_id)
@@ -24,8 +30,33 @@ class HostListing < ApplicationRecord
     HostListingToJoinListing.where(host_listing_id: id, join_listing_id: join_listings.pluck(:id), completed: [nil,false]).count >= max_users
   end
 
+  def completed_join_listings
+    join_listings.where(id: host_listing_to_join_listings.completed.invitation_sent.pluck(:join_listing_id))
+  end
+
+  def currently_on_island
+    join_listings.where(id: host_listing_to_join_listings.not_completed.invitation_sent.pluck(:join_listing_id))
+  end
+
+  def waiting_to_get_on_island
+    join_listings.where(id: host_listing_to_join_listings.waiting_in_queue.pluck(:join_listing_id))
+  end
+
   def allowed_join_listings
-    join_listings.where(id: host_listing_to_join_listings.not_completed.limit(allowed_users).pluck(:join_listing_id))
+    join_listing_ids = host_listing_to_join_listings.not_completed.limit(allowed_users).pluck(:join_listing_id)
+    join_listings.where(id: join_listing_ids)
+  end
+
+  def mass_allow_onto_island
+    allowed_join_listings.each do |join_listing|
+      allow_onto_island(join_listing.id) if HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: join_listing.id).invitation_sent_time.nil?
+    end
+  end
+
+  def allow_onto_island(join_listing_id)
+    # Maybe Check if allowed join listings size
+    # Set time on hostlistingtimelisting
+    HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: join_listing_id).update(invitation_sent_time: DateTime.now)
   end
 
   def enqueue(join_listing)
@@ -37,18 +68,6 @@ class HostListing < ApplicationRecord
 
     host_listing_to_join_listing = HostListingToJoinListing.create!(host_listing_id: id, join_listing_id: join_listing.id)
     allow_onto_island(join_listing.id) if allowed_join_listings.include?(join_listing)
-  end
-
-  def mass_allow_onto_island
-    allowed_join_listings.each do |jl|
-      allow_onto_island(jl.id) if HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: jl.id).invitation_sent_time.nil?
-    end
-  end
-
-  def allow_onto_island(join_listing_id)
-    # Maybe Check if allowed join listings size
-    # Set time on hostlistingtimelisting
-    HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: join_listing_id).update(invitation_sent_time: DateTime.now)
   end
 
   def remove_from_queue(join_listing)

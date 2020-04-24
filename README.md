@@ -14,12 +14,9 @@ In table type of listing the booleans are as follows for the previous sentences
 
 
 To reset processed jobs:
+and to reset failed jobs:
+Clear queue
 
 Sidekiq.redis {|c| c.del('stat:processed') }
-
-and to reset failed jobs:
-
 Sidekiq.redis {|c| c.del('stat:failed') }
-
-Clear queue
 Sidekiq::Queue.all.each(&:clear)
