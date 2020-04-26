@@ -11,3 +11,12 @@ In table type of listing the booleans are as follows for the previous sentences
 | 2        | false   | true    |
 | 3        | true    | false   |
 | 4        | true    | true    |
+
+
+To reset processed jobs:
+and to reset failed jobs:
+Clear queue
+
+Sidekiq.redis {|c| c.del('stat:processed') }
+Sidekiq.redis {|c| c.del('stat:failed') }
+Sidekiq::Queue.all.each(&:clear)

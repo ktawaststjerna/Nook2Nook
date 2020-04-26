@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get install -y nodejs yarn
 
 # throw errors if Gemfile has been modified since Gemfile.lock
-RUN bundle config --global frozen 1
+# RUN bundle config --global frozen 1
 
 WORKDIR /usr/src/app
 
