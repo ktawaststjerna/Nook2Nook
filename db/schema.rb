@@ -10,11 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_20_232010) do
+ActiveRecord::Schema.define(version: 2020_04_22_234803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "host_listing_to_join_listings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "host_listing_id"
+    t.uuid "join_listing_id"
+    t.boolean "completed"
+    t.datetime "invitation_sent_time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "host_listings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.uuid "user_id"
+    t.uuid "item_id"
+    t.boolean "selling"
+    t.integer "amount"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer "max_users"
+    t.integer "allowed_users"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "items", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
@@ -22,33 +44,14 @@ ActiveRecord::Schema.define(version: 2020_04_20_232010) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "listings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "join_listings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.uuid "item_id"
-    t.boolean "hosting"
     t.boolean "selling"
-    t.integer "amount"
-    t.integer "amount_minimum"
-    t.integer "amount_maximum"
-    t.datetime "start_time"
-    t.datetime "end_time"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id"], name: "index_listings_on_item_id"
-    t.index ["user_id"], name: "index_listings_on_user_id"
-  end
-
-  create_table "queue_list_to_users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.uuid "queue_list_id"
-    t.uuid "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
-  create_table "queue_lists", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "max_users"
-    t.integer "allowed_users"
-    t.uuid "listing_id"
+    t.integer "amount_min"
+    t.integer "amount_max"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
