@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Join Listings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Item</th>
+      <th>Selling</th>
+      <th>Amount min</th>
+      <th>Amount max</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @join_listings.each do |join_listing| %>
+      <tr>
+        <td><%= join_listing.user_id %></td>
+        <td><%= join_listing.item_id %></td>
+        <td><%= join_listing.selling %></td>
+        <td><%= join_listing.amount_min %></td>
+        <td><%= join_listing.amount_max %></td>
+        <td><%= join_listing.start_date %></td>
+        <td><%= join_listing.end_date %></td>
+        <td><%= link_to 'Show', join_listing %></td>
+        <td><%= link_to 'Edit', edit_join_listing_path(join_listing) %></td>
+        <td><%= link_to 'Destroy', join_listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Join Listing', new_join_listing_path %>
