@@ -1,0 +1,52 @@
+<%= form_with(model: join_listing, local: true) do |form| %>
+  <% if join_listing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(join_listing.errors.count, "error") %> prohibited this join_listing from being saved:</h2>
+
+      <ul>
+        <% join_listing.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :user_id %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :item_id %>
+    <%= form.text_field :item_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :selling %>
+    <%= form.check_box :selling %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount_min %>
+    <%= form.number_field :amount_min %>
+  </div>
+
+  <div class="field">
+    <%= form.label :amount_max %>
+    <%= form.number_field :amount_max %>
+  </div>
+
+  <div class="field">
+    <%= form.label :start_date %>
+    <%= form.datetime_select :start_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_date %>
+    <%= form.datetime_select :end_date %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

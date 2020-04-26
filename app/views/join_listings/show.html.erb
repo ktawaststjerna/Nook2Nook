@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @join_listing.user_id %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @join_listing.item_id %>
+</p>
+
+<p>
+  <strong>Selling:</strong>
+  <%= @join_listing.selling %>
+</p>
+
+<p>
+  <strong>Amount min:</strong>
+  <%= @join_listing.amount_min %>
+</p>
+
+<p>
+  <strong>Amount max:</strong>
+  <%= @join_listing.amount_max %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @join_listing.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @join_listing.end_date %>
+</p>
+
+<%= link_to 'Edit', edit_join_listing_path(@join_listing) %> |
+<%= link_to 'Back', join_listings_path %>

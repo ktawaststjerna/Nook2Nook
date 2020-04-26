@@ -1,0 +1,145 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @host_listing.user_id %>
+</p>
+
+<p>
+  <strong>Item:</strong>
+  <%= @host_listing.item_id %>
+</p>
+
+<p>
+  <strong>Selling:</strong>
+  <%= @host_listing.selling %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @host_listing.amount %>
+</p>
+
+<p>
+  <strong>Start date:</strong>
+  <%= @host_listing.start_date %>
+</p>
+
+<p>
+  <strong>End date:</strong>
+  <%= @host_listing.end_date %>
+</p>
+
+<p>
+  <strong>Max users:</strong>
+  <%= @host_listing.max_users %>
+</p>
+
+<p>
+  <strong>Allowed users:</strong>
+  <%= @host_listing.allowed_users %>
+</p>
+
+<h1>On Island</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Join Listing ID</th>
+      <th>User</th>
+      <th>Item</th>
+      <th>Selling</th>
+      <th>Amount min</th>
+      <th>Amount max</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @host_listing.currently_on_island.each do |join_listing| %>
+      <tr>
+        <td><%= join_listing.id %></td>
+        <td><%= join_listing.user_id %></td>
+        <td><%= join_listing.item_id %></td>
+        <td><%= join_listing.selling %></td>
+        <td><%= join_listing.amount_min %></td>
+        <td><%= join_listing.amount_max %></td>
+        <td><%= join_listing.start_date %></td>
+        <td><%= join_listing.end_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>In Queue</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Join Listing ID</th>
+      <th>User</th>
+      <th>Item</th>
+      <th>Selling</th>
+      <th>Amount min</th>
+      <th>Amount max</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @host_listing.waiting_to_get_on_island.each do |join_listing| %>
+      <tr>
+        <td><%= join_listing.id %></td>
+        <td><%= join_listing.user_id %></td>
+        <td><%= join_listing.item_id %></td>
+        <td><%= join_listing.selling %></td>
+        <td><%= join_listing.amount_min %></td>
+        <td><%= join_listing.amount_max %></td>
+        <td><%= join_listing.start_date %></td>
+        <td><%= join_listing.end_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>Completed</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Join Listing ID</th>
+      <th>User</th>
+      <th>Item</th>
+      <th>Selling</th>
+      <th>Amount min</th>
+      <th>Amount max</th>
+      <th>Start date</th>
+      <th>End date</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @host_listing.completed_join_listings.each do |join_listing| %>
+      <tr>
+        <td><%= join_listing.id %></td>
+        <td><%= join_listing.user_id %></td>
+        <td><%= join_listing.item_id %></td>
+        <td><%= join_listing.selling %></td>
+        <td><%= join_listing.amount_min %></td>
+        <td><%= join_listing.amount_max %></td>
+        <td><%= join_listing.start_date %></td>
+        <td><%= join_listing.end_date %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Edit', edit_host_listing_path(@host_listing) %> |
+<%= link_to 'Back', host_listings_path %>
