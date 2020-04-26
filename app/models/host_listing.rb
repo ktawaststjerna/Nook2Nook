@@ -13,6 +13,15 @@ class HostListing < ApplicationRecord
   scope :buying, -> { where(selling: false) }
   scope :active, -> { where('start_date <= ? AND end_date >= ?', DateTime.now, DateTime.now) }
 
+  def self.host_listing_hash_based_on_number_of_queue(amount_min, amount_max, item_id)
+    # # Sort by amount of joinable listings in queue, lowest amount first, largest last
+    select("host_listings.id, host_listings.user_id, host_listings.allowed_users, host_listings.start_date, host_listings.end_date, host_listings.max_users, count(join_listings.id) AS join_listings_count").
+      left_joins(:join_listings).
+      group("host_listings.id").
+      order("join_listings_count ASC").
+      where(amount: amount_min..amount_max, item_id: item_id)
+  end
+
   def time_limit_check
     twelve_hours_in_seconds = 43210 # Slight padding on seconds just incase there's a delay inbetween start and end date on creating...
     raise 'Host Listing cannot be longer then 12 hours' if end_date.ago(twelve_hours_in_seconds) > start_date
@@ -32,6 +41,10 @@ class HostListing < ApplicationRecord
 
   def completed_join_listings
     join_listings.where(id: host_listing_to_join_listings.completed.invitation_sent.pluck(:join_listing_id))
+  end
+
+  def total_join_listings_in_queue
+    join_listings.where(id: host_listing_to_join_listings.not_completed.pluck(:join_listing_id))
   end
 
   def currently_on_island
