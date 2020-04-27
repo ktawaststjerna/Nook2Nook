@@ -9,6 +9,8 @@ class HostListing < ApplicationRecord
   before_save :duplicate_listings?
   before_save :time_limit_check
 
+  validates :user_id, :item_id, :selling, :amount, :start_date, :end_date, :max_users, :allowed_users, presence: true
+
   scope :selling, -> { where(selling: true) }
   scope :buying, -> { where(selling: false) }
   scope :active, -> { where('start_date <= ? AND end_date >= ?', DateTime.now, DateTime.now) }
