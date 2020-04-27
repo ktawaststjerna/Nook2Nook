@@ -1,6 +1,7 @@
 class User < ApplicationRecord
   has_many :join_listings
   has_many :host_listings
+  has_many :notifications
 
   has_secure_password
 

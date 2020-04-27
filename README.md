@@ -1,5 +1,6 @@
 TODO:
-1) User handling (token system)
+1) Update scoping on all controllers
+2) Look at some bootstraping gems for frontend
 
 1) I want to BUY from Daisy on someone elses island
 2) I want to SELL to Tom Nook on someone elses island

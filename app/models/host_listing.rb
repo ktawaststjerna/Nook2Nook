@@ -9,7 +9,8 @@ class HostListing < ApplicationRecord
   before_save :duplicate_listings?
   before_save :time_limit_check
 
-  validates :user_id, :item_id, :selling, :amount, :start_date, :end_date, :max_users, :allowed_users, presence: true
+  validates :user_id, :item_id, :amount, :start_date, :end_date, :max_users, :allowed_users, presence: true
+  validates :selling, inclusion: { in: [true, false] }
 
   scope :selling, -> { where(selling: true) }
   scope :buying, -> { where(selling: false) }
