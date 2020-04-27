@@ -62,14 +62,16 @@ class HostListing < ApplicationRecord
 
   def mass_allow_onto_island
     allowed_join_listings.each do |join_listing|
-      allow_onto_island(join_listing.id) if HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: join_listing.id).invitation_sent_time.nil?
+      allow_onto_island(join_listing) if HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: join_listing.id).invitation_sent_time.nil?
     end
   end
 
-  def allow_onto_island(join_listing_id)
+  def allow_onto_island(join_listing)
     # Maybe Check if allowed join listings size
     # Set time on hostlistingtimelisting
-    HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: join_listing_id).update(invitation_sent_time: DateTime.now)
+    if HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: join_listing.id).update!(invitation_sent_time: DateTime.now)
+      CreateNotificationJob.perform_later(join_listing.user_id, user.dodo_code)
+    end
   end
 
   def enqueue(join_listing)
@@ -80,7 +82,7 @@ class HostListing < ApplicationRecord
     return if DateTime.now < start_date || DateTime.now > end_date
 
     host_listing_to_join_listing = HostListingToJoinListing.create!(host_listing_id: id, join_listing_id: join_listing.id)
-    allow_onto_island(join_listing.id) if allowed_join_listings.include?(join_listing)
+    allow_onto_island(join_listing) if allowed_join_listings.include?(join_listing)
   end
 
   def remove_from_queue(join_listing)

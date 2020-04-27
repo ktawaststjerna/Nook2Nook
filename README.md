@@ -1,3 +1,6 @@
+TODO:
+1) User handling (token system)
+
 1) I want to BUY from Daisy on someone elses island
 2) I want to SELL to Tom Nook on someone elses island
 3) I want PEOPLE to BUY from Daisy
