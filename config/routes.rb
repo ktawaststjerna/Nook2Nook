@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :notifications
   require 'sidekiq/web'
   require 'sidekiq/cron/web'
   mount Sidekiq::Web => '/sidekiq'
