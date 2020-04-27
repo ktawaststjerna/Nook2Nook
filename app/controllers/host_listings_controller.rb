@@ -4,7 +4,7 @@ class HostListingsController < ApplicationController
   # GET /host_listings
   # GET /host_listings.json
   def index
-    @host_listings = HostListing.all
+    @host_listings = current_user.host_listings.all
   end
 
   # GET /host_listings/1

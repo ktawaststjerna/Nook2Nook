@@ -1,6 +1,6 @@
 pp 'Creating Users'
 1000.times do |x|
-  User.create!(email: "#{x}-email@gmail.com", dodo_code: "dodo-#{x}", island_name: "Barovia-#{x}", character_name: "name-#{x}")
+  User.create!(email: "#{x}-email@gmail.com", dodo_code: "dodo-#{x}", island_name: "Barovia-#{x}", character_name: "name-#{x}", password: 'test123')
 end
 
 pp 'Creating Item (turnip)'

@@ -4,7 +4,7 @@ class JoinListingsController < ApplicationController
   # GET /join_listings
   # GET /join_listings.json
   def index
-    @join_listings = JoinListing.all
+    @join_listings = @current_user.join_listings.all
   end
 
   # GET /join_listings/1

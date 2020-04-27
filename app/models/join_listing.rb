@@ -7,7 +7,8 @@ class JoinListing < ApplicationRecord
   before_save :duplicate_listings?
   before_save :time_limit_check
 
-  validates :user_id, :item_id, :selling, :amount_min, :amount_max, :start_date, :end_date, presence: true
+  validates :user_id, :item_id, :amount_min, :amount_max, :start_date, :end_date, presence: true
+  validates :selling, inclusion: { in: [true, false] }
 
   scope :selling, -> { where(selling: true) }
   scope :buying, -> { where(selling: false) }
