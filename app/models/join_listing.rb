@@ -4,10 +4,10 @@ class JoinListing < ApplicationRecord
   has_many :host_listing_to_join_listing
   has_many :host_listings, through: :host_listing_to_join_listing
 
-  # TODO: 12 hour maximum
-
   before_save :duplicate_listings?
   before_save :time_limit_check
+
+  validates :user_id, :item_id, :selling, :amount_min, :amount_max, :start_date, :end_date, presence: true
 
   scope :selling, -> { where(selling: true) }
   scope :buying, -> { where(selling: false) }

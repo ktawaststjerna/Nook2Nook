@@ -25,10 +25,12 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    password = User.create_password
+    @user.password = password
 
     respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+      if @user.save!
+        format.html { redirect_to @user, notice: "User was successfully created. Password #{password}. DO NOT LOSE THIS YOU CANNOT GET IT BACK!" }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -69,6 +71,11 @@ class UsersController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def user_params
-      params.require(:user).permit(:email, :dodo_code, :island_name, :character_name, :password_digest, :recovery_password_digest)
+      params.require(:user).permit(
+        :dodo_code,
+        :island_name,
+        :character_name,
+        :email
+      )
     end
 end

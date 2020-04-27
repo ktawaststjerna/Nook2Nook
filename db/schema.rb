@@ -65,12 +65,12 @@ ActiveRecord::Schema.define(version: 2020_04_26_234509) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "email"
     t.string "dodo_code"
     t.string "island_name"
     t.string "character_name"
+    t.string "email"
     t.string "password_digest"
-    t.string "recovery_password_digest"
+    t.string "password_recovery_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

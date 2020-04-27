@@ -1,11 +1,6 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
   <strong>Dodo code:</strong>
   <%= @user.dodo_code %>
 </p>
@@ -18,16 +13,6 @@
 <p>
   <strong>Character name:</strong>
   <%= @user.character_name %>
-</p>
-
-<p>
-  <strong>Password digest:</strong>
-  <%= @user.password_digest %>
-</p>
-
-<p>
-  <strong>Recovery password digest:</strong>
-  <%= @user.recovery_password_digest %>
 </p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
