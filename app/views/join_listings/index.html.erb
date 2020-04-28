@@ -12,6 +12,7 @@
       <th>Amount max</th>
       <th>Start date</th>
       <th>End date</th>
+      <th>Has Host Listings?</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -26,6 +27,7 @@
         <td><%= join_listing.amount_max %></td>
         <td><%= join_listing.start_date %></td>
         <td><%= join_listing.end_date %></td>
+        <td><%= join_listing.host_listings.present? %></td>
         <td><%= link_to 'Show', join_listing %></td>
         <td><%= link_to 'Edit', edit_join_listing_path(join_listing) %></td>
         <td><%= link_to 'Destroy', join_listing, method: :delete, data: { confirm: 'Are you sure?' } %></td>

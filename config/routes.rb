@@ -3,11 +3,12 @@ Rails.application.routes.draw do
   require 'sidekiq/cron/web'
   mount Sidekiq::Web => '/sidekiq'
 
-  root 'dashboard#dashboard'
+  root 'index#index'
 
+  get 'dashboard', to: 'dashboard#dashboard'
   resources :notifications
   resources :items
-  resources :users
+  resources :users, only: [:show, :new, :create, :destroy, :update]
   resources :join_listings
   resources :host_listings
   resources :sessions, only: [:new, :create, :destroy]
