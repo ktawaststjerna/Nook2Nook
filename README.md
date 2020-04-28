@@ -1,5 +1,4 @@
 TODO:
-1) Update scoping on all controllers
 2) Look at some bootstraping gems for frontend
 
 1) I want to BUY from Daisy on someone elses island
