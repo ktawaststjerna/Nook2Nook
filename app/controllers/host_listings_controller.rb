@@ -14,7 +14,7 @@ class HostListingsController < ApplicationController
 
   # GET /host_listings/new
   def new
-    @host_listing = HostListing.new
+    @host_listing = current_user.host_listings.new
   end
 
   # GET /host_listings/1/edit
@@ -24,7 +24,7 @@ class HostListingsController < ApplicationController
   # POST /host_listings
   # POST /host_listings.json
   def create
-    @host_listing = HostListing.new(host_listing_params)
+    @host_listing = current_user.host_listings.new(host_listing_params)
 
     respond_to do |format|
       if @host_listing.save
@@ -64,11 +64,20 @@ class HostListingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_host_listing
-      @host_listing = HostListing.find(params[:id])
+      @host_listing = current_user.host_listings.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def host_listing_params
-      params.require(:host_listing).permit(:user_id, :item_id, :selling, :amount, :start_date, :end_date, :max_users, :allowed_users)
+      params.require(:host_listing).permit(
+        :user_id,
+        :item_id,
+        :selling,
+        :amount,
+        :start_date,
+        :end_date,
+        :max_users,
+        :allowed_users
+      )
     end
 end
