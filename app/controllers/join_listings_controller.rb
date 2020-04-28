@@ -4,7 +4,7 @@ class JoinListingsController < ApplicationController
   # GET /join_listings
   # GET /join_listings.json
   def index
-    @join_listings = @current_user.join_listings.all
+    @join_listings = current_user.join_listings.all
   end
 
   # GET /join_listings/1
@@ -14,7 +14,7 @@ class JoinListingsController < ApplicationController
 
   # GET /join_listings/new
   def new
-    @join_listing = JoinListing.new
+    @join_listing = current_user.join_listings.new
   end
 
   # GET /join_listings/1/edit
@@ -24,7 +24,7 @@ class JoinListingsController < ApplicationController
   # POST /join_listings
   # POST /join_listings.json
   def create
-    @join_listing = JoinListing.new(join_listing_params)
+    @join_listing = current_user.join_listings.new(join_listing_params)
 
     respond_to do |format|
       if @join_listing.save
@@ -64,11 +64,19 @@ class JoinListingsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_join_listing
-      @join_listing = JoinListing.find(params[:id])
+      @join_listing = current_user.join_listings.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def join_listing_params
-      params.require(:join_listing).permit(:user_id, :item_id, :selling, :amount_min, :amount_max, :start_date, :end_date)
+      params.require(:join_listing).permit(
+        :user_id,
+        :item_id,
+        :selling,
+        :amount_min,
+        :amount_max,
+        :start_date,
+        :end_date
+      )
     end
 end
