@@ -8,7 +8,7 @@ Rails.application.routes.draw do
   get 'dashboard', to: 'dashboard#dashboard'
   resources :notifications
   resources :items
-  resources :users, only: [:show, :new, :create, :destroy, :update]
+  resources :users
   resources :join_listings
   resources :host_listings
   resources :sessions, only: [:new, :create, :destroy]
