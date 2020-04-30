@@ -43,32 +43,33 @@
       </div>
 
       <!-- Nav Item - Pages Collapse Menu -->
-      <%# <li class="nav-item">
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          <i class="fas fa-fw fa-cog"></i>
+          <span>Host Listings</span>
+        </a>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Listings:</h6>
+            <a class="collapse-item" href="/host_listings/new">Create Listing</a>
+            <a class="collapse-item" href="/host_listings">See Listings</a>
+          </div>
+        </div>
+      </li>
+
+      <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Listings</span>
+          <span>Join Listings</span>
         </a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Listings:</h6>
-            <a class="collapse-item" href="buttons.html">Host Listings</a>
-            <a class="collapse-item" href="cards.html">Join Listings</a>
+            <a class="collapse-item" href="/join_listings/new">Create Listing</a>
+            <a class="collapse-item" href="/join_listings">See Listings</a>
           </div>
         </div>
-      </li> %>
-
-      <!-- Nav Item - My Host Listings -->
-      <li class="nav-item">
-        <a class="nav-link" href="/host_listings">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Host Listings</span></a>
-      </li>
-
-      <!-- Nav Item - My Join Listings -->
-      <li class="nav-item">
-        <a class="nav-link" href="/join_listings">
-          <i class="fas fa-fw fa-chart-area"></i>
-          <span>Join Listings</span></a>
       </li>
 
       <!-- Divider -->
@@ -161,7 +162,7 @@
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-envelope fa-fw"></i>
                 <!-- Counter - Messages -->
-                <span class="badge badge-danger badge-counter"> <%= current_user.notifications.size %></span>
+                <span class="badge badge-danger badge-counter"> <%= current_user.notifications.unread.size %></span>
               </a>
               <!-- Dropdown - Messages -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
@@ -169,10 +170,13 @@
                   Message Center
                 </h6>
                 <% current_user.notifications.each do |notification| %>
-                  <a class="dropdown-item d-flex align-items-center" href="#">
+                  <a class="dropdown-item d-flex align-items-center" href= <%="/notifications/#{notification.id}"%> >
                     <div class="dropdown-list-image mr-3">
-                      <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="">
-                      <div class="status-indicator bg-success"></div>
+                      <% if notification.read? %>
+                        <div class="status-indicator bg-failure"></div>
+                      <% else %>
+                        <div class="status-indicator bg-success"></div>
+                      <% end %>
                     </div>
                     <div class="font-weight-bold">
                       <div class="text-truncate"> <%= notification.message %> </div>
@@ -180,7 +184,7 @@
                     </div>
                   </a>
                 <% end %>
-                <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                <a class="dropdown-item text-center small text-gray-500" href="/notifications">Read More Messages</a>
               </div>
             </li>
 
@@ -196,17 +200,9 @@
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">
+                <a class="dropdown-item" href=<%= %"users/#{current_user.id}" %>%>
                   <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                   Profile
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Settings
-                </a>
-                <a class="dropdown-item" href="#">
-                  <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                  Activity Log
                 </a>
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
@@ -250,8 +246,8 @@
                             <div>Character Name: <%= host_listing.user.character_name %></div>
                             <div>Item Name: <%= host_listing.item.name %></div>
                             <div>Amount: <%= host_listing.amount %></div>
-                            <div>Max Users: <%= host_listing.max_users %></div>
-                            <div>Allowed Users: <%= host_listing.allowed_users %></div>
+                            <div>Max Users: <%= host_listing.total_join_listings_in_queue.count %>/<%= host_listing.max_users %></div>
+                            <div>Allowed Users: <%= host_listing.currently_on_island.size %>/<%= host_listing.allowed_users %></div>
                             <div>Start Time: <%= host_listing.start_date %></div>
                             <div>End Time: <%= host_listing.end_date %></div>
                           </div>
