@@ -1,5 +1,10 @@
 TODO:
-2) Look at some bootstraping gems for frontend
+1) Test making DODO code on animal crossing
+2) Make dashboard (sidebar, top, bottom) inheritable
+3) Make host listing show, index, create, update with updated front-end
+4) Make host listing show, index, create, update with updated front-end
+5) Make login ith updated front-end
+6) Make sign-up with updated front-end
 
 1) I want to BUY from Daisy on someone elses island
 2) I want to SELL to Tom Nook on someone elses island
