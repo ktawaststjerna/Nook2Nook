@@ -243,9 +243,10 @@
                         <div class="card shadow mb-4">
                           <!-- Card Header - Dropdown -->
                           <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-primary"> <%= host_listing.item.name %> - <%= host_listing.amount %> bells </h6>
+                            <a class="btn btn-primary" href=<%= "/host_listings/#{host_listing.id}"%> > <%= host_listing.user.island_name %> - <%= host_listing.item.name %> - <%= host_listing.amount %> bells </a>
                           </div>
                           <div class="card-body">
+                            <div>ID: <%= host_listing.id %></div>
                             <div>Item Name: <%= host_listing.item.name %></div>
                             <div>Amount: <%= host_listing.amount %></div>
                             <div>Max Users: <%= host_listing.total_join_listings_in_queue.count %>/<%= host_listing.max_users %></div>
