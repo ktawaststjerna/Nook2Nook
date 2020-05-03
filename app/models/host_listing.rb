@@ -9,7 +9,7 @@ class HostListing < ApplicationRecord
   before_save :duplicate_listings?
   before_save :time_limit_check
 
-  validates :user_id, :item_id, :amount, :start_date, :end_date, :max_users, :allowed_users, presence: true
+  validates :user_id, :item_id, :dodo_code, :amount, :start_date, :end_date, :max_users, :allowed_users, presence: true
   validates :selling, inclusion: { in: [true, false] }
 
   scope :selling, -> { where(selling: true) }
@@ -73,7 +73,7 @@ class HostListing < ApplicationRecord
     # Maybe Check if allowed join listings size
     # Set time on hostlistingtimelisting
     if HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: join_listing.id).update!(invitation_sent_time: DateTime.now)
-      CreateNotificationJob.perform_later(join_listing.user_id, user.dodo_code)
+      CreateNotificationJob.perform_later(join_listing.user_id, dodo_code)
     end
   end
 

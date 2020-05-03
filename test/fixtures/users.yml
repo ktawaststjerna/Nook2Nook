@@ -2,7 +2,6 @@
 
 one:
   email: MyString
-  dodo_code: MyString
   island_name: MyString
   character_name: MyString
   password_digest: MyString
@@ -10,7 +9,6 @@ one:
 
 two:
   email: MyString
-  dodo_code: MyString
   island_name: MyString
   character_name: MyString
   password_digest: MyString

@@ -1,6 +1,6 @@
 TODO:
-1) Test making DODO code on animal crossing
-2) Make dashboard (sidebar, top, bottom) inheritable
+1) ~~Update Dodo code to be on host listing, not user account~~
+2) ~~Make dashboard half join listing half host listings~~
 3) Make host listing show, index, create, update with updated front-end
 4) Make host listing show, index, create, update with updated front-end
 5) Make login ith updated front-end

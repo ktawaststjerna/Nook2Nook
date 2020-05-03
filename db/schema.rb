@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 2020_04_30_021444) do
   create_table "host_listings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.uuid "user_id"
     t.uuid "item_id"
+    t.string "dodo_code"
     t.boolean "selling"
     t.integer "amount"
     t.datetime "start_date"
@@ -71,7 +72,6 @@ ActiveRecord::Schema.define(version: 2020_04_30_021444) do
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "dodo_code"
     t.string "island_name"
     t.string "character_name"
     t.string "email"
