@@ -3,6 +3,7 @@ class CreateHostListings < ActiveRecord::Migration[6.0]
     create_table :host_listings, id: :uuid do |t|
       t.uuid :user_id
       t.uuid :item_id
+      t.string :dodo_code
       t.boolean :selling
       t.integer :amount
       t.datetime :start_date

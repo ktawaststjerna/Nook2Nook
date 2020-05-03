@@ -15,7 +15,6 @@ class UsersTest < ApplicationSystemTestCase
     click_on "New User"
 
     fill_in "Character name", with: @user.character_name
-    fill_in "Dodo code", with: @user.dodo_code
     fill_in "Email", with: @user.email
     fill_in "Island name", with: @user.island_name
     fill_in "Password digest", with: @user.password_digest
@@ -31,7 +30,6 @@ class UsersTest < ApplicationSystemTestCase
     click_on "Edit", match: :first
 
     fill_in "Character name", with: @user.character_name
-    fill_in "Dodo code", with: @user.dodo_code
     fill_in "Email", with: @user.email
     fill_in "Island name", with: @user.island_name
     fill_in "Password digest", with: @user.password_digest

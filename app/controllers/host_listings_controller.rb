@@ -72,6 +72,7 @@ class HostListingsController < ApplicationController
       params.require(:host_listing).permit(
         :user_id,
         :item_id,
+        :dodo_code,
         :selling,
         :amount,
         :start_date,
