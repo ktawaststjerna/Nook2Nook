@@ -8,6 +8,8 @@ TODO:
 ~~Make logged in users auto go to dashboard~~
 ~~Icon on title bar thing~~
 Fix jobs
+Add devise to project
+Create digital ocean server
 
 1) I want to BUY from Daisy on someone elses island
 2) I want to SELL to Tom Nook on someone elses island
