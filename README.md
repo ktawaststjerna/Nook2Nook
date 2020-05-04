@@ -11,6 +11,11 @@ Fix jobs
 Add devise to project
 Create digital ocean server
 
+Deploying Prod Checklist
+1) Set config/environments/production.rd `config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }`. In production, :host should be set to the actual host of your application.
+
+Matrix for Host Listing and Buy Listing for selling
+
 1) I want to BUY from Daisy on someone elses island
 2) I want to SELL to Tom Nook on someone elses island
 3) I want PEOPLE to BUY from Daisy

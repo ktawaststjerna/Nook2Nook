@@ -320,7 +320,7 @@
         <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-          <a class="btn btn-primary" href="/logout">Logout</a>
+          <%# <%= link_to('Sign out',  destroy_user_session_path, method: 'delete', class: 'btn btn-danger m-5') %>
         </div>
       </div>
     </div>

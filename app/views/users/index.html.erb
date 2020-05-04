@@ -21,8 +21,6 @@
         <td><%= user.email %></td>
         <td><%= user.island_name %></td>
         <td><%= user.character_name %></td>
-        <td><%= user.password_digest %></td>
-        <td><%= user.recovery_password_digest %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
