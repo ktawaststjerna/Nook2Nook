@@ -1,12 +1,12 @@
 TODO:
-1) ~~Update Dodo code to be on host listing, not user account~~
-2) ~~Make dashboard half join listing half host listings~~
-3) ~~Make host listing show, index, create, update with updated front-end~~
-4) ~~Make host listing show, index, create, update with updated front-end~~
-5) ~~Make login ith updated front-end~~
-6) ~~Make sign-up with updated front-end~~
-7) Make logged in users auto go to dashboard
-8) Icon on title bar thing
+~~Update Dodo code to be on host listing, not user account~~
+~~Make dashboard half join listing half host listings~~
+~~Make host listing show, index, create, update with updated front-end~~
+~~Make host listing show, index, create, update with updated front-end~~
+~~Make login ith updated front-end~~
+~~Make sign-up with updated front-end~~
+~~Make logged in users auto go to dashboard~~
+~~Icon on title bar thing~~
 
 1) I want to BUY from Daisy on someone elses island
 2) I want to SELL to Tom Nook on someone elses island
