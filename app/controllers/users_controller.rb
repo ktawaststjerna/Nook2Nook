@@ -24,7 +24,8 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @user.save!
-        format.html { redirect_to @user, notice: "User was successfully created. Password #{password}. DO NOT LOSE THIS YOU CANNOT GET IT BACK!" }
+        @user.welcome_email(password)
+        format.html { redirect_to @user, notice: "User was successfully created. Your password is #{password}" }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -50,7 +51,7 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    current_user.destroy
+    current_user.destroy!
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }

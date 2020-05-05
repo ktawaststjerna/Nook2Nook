@@ -28,6 +28,9 @@ gem 'sidekiq-cron', '~> 1.2.0'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
+# Use for Emails
+gem 'sendgrid-ruby'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
 
