@@ -1,15 +1,23 @@
-TODO:
-~~Update Dodo code to be on host listing, not user account~~
-~~Make dashboard half join listing half host listings~~
-~~Make host listing show, index, create, update with updated front-end~~
-~~Make host listing show, index, create, update with updated front-end~~
-~~Make login ith updated front-end~~
-~~Make sign-up with updated front-end~~
-~~Make logged in users auto go to dashboard~~
-~~Icon on title bar thing~~
-Fix jobs
-Create digital ocean server
+# TODO:
+* ~~Update Dodo code to be on host listing, not user account~~
+* ~~Make dashboard half join listing half host listings~~
+* ~~Make host listing show, index, create, update with updated front-end~~
+* ~~Make host listing show, index, create, update with updated front-end~~
+* ~~Make login ith updated front-end~~
+* ~~Make sign-up with updated front-end~~
+* ~~Make logged in users auto go to dashboard~~
+* ~~Icon on title bar thing~~
+* Fix jobs
+* Create digital ocean server
 
+# ENV
+```
+POSTGRES_PASSWORD=
+SENDGRID_API_KEY=
+DOMAIN= (development = localhost:3000)
+```
+
+# Logic Breakdown
 1) I want to BUY from Daisy on someone elses island
 2) I want to SELL to Tom Nook on someone elses island
 3) I want PEOPLE to BUY from Daisy
