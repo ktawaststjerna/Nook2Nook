@@ -6,7 +6,7 @@ class HostListing < ApplicationRecord
 
   # TODO: 12 hour maximum
 
-  before_save :duplicate_listings?
+  # before_save :duplicate_listings?
   before_save :time_limit_check
 
   validates :user_id, :item_id, :dodo_code, :amount, :start_date, :end_date, :max_users, :allowed_users, presence: true
