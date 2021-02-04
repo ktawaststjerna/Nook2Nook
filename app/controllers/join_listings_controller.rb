@@ -27,7 +27,7 @@ class JoinListingsController < ApplicationController
     @join_listing = current_user.join_listings.new(join_listing_params)
 
     respond_to do |format|
-      if @join_listing.save
+      if @join_listing.save!
         format.html { redirect_to @join_listing, notice: 'Join listing was successfully created.' }
         format.json { render :show, status: :created, location: @join_listing }
       else
