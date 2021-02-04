@@ -31,7 +31,7 @@ class HostListing < ApplicationRecord
   end
 
   def duplicate_listings?
-    raise "User already has Host Listing with Item #{item.name}" if user.join_listings.pluck(:item_id).include?(item_id)
+    raise "User already has Host Listing with Item #{item.name}" if user.host_listings.pluck(:item_id).include?(item_id)
   end
 
   def complete_join_listing(join_listing_id)
