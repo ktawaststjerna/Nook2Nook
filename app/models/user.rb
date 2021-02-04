@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_secure_password
 
   validates :island_name, :character_name, :password_digest, :email, presence: true
+  validates_uniqueness_of :email
 
   def self.create_password
     SecureRandom.hex(8)
@@ -33,8 +34,8 @@ class User < ApplicationRecord
     # content = Content.new(type: 'text/plain')
 
     response = sg.client.mail._('send').post(request_body: mail.to_json)
-    puts response.status_code
-    puts response.body
-    puts response.headers
+    # puts response.status_code
+    # puts response.body
+    # puts response.headers
   end
 end

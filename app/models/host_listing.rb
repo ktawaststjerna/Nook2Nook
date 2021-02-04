@@ -6,7 +6,7 @@ class HostListing < ApplicationRecord
 
   # TODO: 12 hour maximum
 
-  before_save :duplicate_listings?
+  # before_save :duplicate_listings?
   before_save :time_limit_check
 
   validates :user_id, :item_id, :dodo_code, :amount, :start_date, :end_date, :max_users, :allowed_users, presence: true
@@ -31,7 +31,7 @@ class HostListing < ApplicationRecord
   end
 
   def duplicate_listings?
-    raise "User already has Join Listing with Item #{item.name}" if user.join_listings.pluck(:item_id).include?(item_id)
+    raise "User already has Host Listing with Item #{item.name}" if user.host_listings.pluck(:item_id).include?(item_id)
   end
 
   def complete_join_listing(join_listing_id)

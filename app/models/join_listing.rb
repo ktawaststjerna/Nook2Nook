@@ -4,7 +4,7 @@ class JoinListing < ApplicationRecord
   has_many :host_listing_to_join_listing
   has_many :host_listings, through: :host_listing_to_join_listing
 
-  before_save :duplicate_listings?
+  # before_save :duplicate_listings?
   before_save :time_limit_check
 
   validates :user_id, :item_id, :amount_min, :amount_max, :start_date, :end_date, presence: true
