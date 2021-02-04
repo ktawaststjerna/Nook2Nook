@@ -73,7 +73,7 @@ class HostListing < ApplicationRecord
     # Maybe Check if allowed join listings size
     # Set time on hostlistingtimelisting
     if HostListingToJoinListing.find_by(host_listing_id: id, join_listing_id: join_listing.id).update!(invitation_sent_time: DateTime.now)
-      CreateNotificationJob.perform_later(join_listing.user_id, dodo_code)
+      CreateNotificationJob.perform_later(join_listing.user_id, self.dodo_code)
     end
   end
 
