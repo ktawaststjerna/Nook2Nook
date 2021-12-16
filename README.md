@@ -57,6 +57,10 @@ Clear queue
 
 `Sidekiq::Queue.all.each(&:clear)`
 
+# Some Useful Links
+https://bootstrapmade.com/demo/Vesperr/
+https://www.vecteezy.com/
+
 # TODO:
 * ~~Update Dodo code to be on host listing, not user account~~
 * ~~Make dashboard half join listing half host listings~~
